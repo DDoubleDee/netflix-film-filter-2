@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+    {% extends "main.html" %}
+    {% block content %}
+        <h2>
+            <form action="{{url_for('filter')}}" method="POST">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="filters">
+                                Sort by:
+                                <select name="sorter">
+                                    <option value="0">
+                                        No Sort
+                                    </option>
+                                    <option value="1">
+                                        Date descending
+                                    </option>
+                                    <option value="2">
+                                        Date ascending
+                                    </option>
+                                    <option value="3">
+                                        Title a-z
+                                    </option>
+                                    <option value="4">
+                                        Title z-a
+                                    </option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
+                                Filter by:
+                                <select name="filterer">
+                                    <option value="0">
+                                        No Filter
+                                    </option>
+                                    <option value="1">
+                                        Movie
+                                    </option>
+                                    <option value="2">
+                                        TV Show
+                                    </option>
+                                </select>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
+                                <input id="searchbar" type="text" name="searchbar" placeholder="Search..."/>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
+                                Search in:
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
+                                <input type="checkbox" name="titlecheck" value="on"/ checked>
+                                Title
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
+                                <input type="checkbox" name="countrycheck" value="on"/>
+                                Country
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
+                                <input type="checkbox" name="genrecheck" value="on"/>
+                                Genre
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
+                                <input type="checkbox" name="castcheck" value="on"/>
+                                Cast
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
+                                <input type="checkbox" name="desccheck" value="on"/>
+                                Description
+                            </div>
+                        </td>
+                        <td>
+                            <input id="submitbutton" type="submit" value="Submit"/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </h2>
+        <main>
+            <div id="contents">
+                {% for movie in mlist %}
+                <a href="{{ 'https://www.netflix.com/kz/title/{0}'.format(movie[1]) }}" target="_blank">
+                <table>
+                    <tr>
+                        <td>
+                            {{movie[2]}}
+                        </td>
+                        <td colspan="2">
+                            {{movie[3]}}
+                        </td>
+                        <td>
+                            {{movie[8]}}
+                        </td>
+                        <td>
+                            {{movie[5]}}
+                        </td>
+                        <td rowspan="2">
+                            {{movie[12]}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            {{movie[9]}}
+                        </td>
+                        <td>
+                            {{movie[6]}}
+                        </td>
+                        <td>
+                            {{movie[11]}}
+                        </td>
+                        <td>
+                            {{movie[10]}}
+                        </td>
+                        <td>
+                            {{movie[4]}}
+                        </td>
+                    </tr>
+                </table>
+                </a>
+                {% endfor %}
+            </div>
+        </main>
+    {% endblock %}
+</body>
+</html>

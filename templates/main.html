@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Netflix Filter Template</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/main.css')}}">
+</head>
+<body>
+    <div id="page">
+        <h1 id="nav">
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <div id="logo">
+                                NETFLIX Film Filter
+                            </div>
+                        </td>
+                            <td class="navi">
+                        <a href="{{url_for('home')}}">
+                                <div class="navbutton">
+                                    Home
+                                </div>
+                        </a>
+                            </td>
+                            <td class="navi">
+                        <a href="{{url_for('profile')}}">
+                                <div class="navbutton">
+                                    Profile
+                                </div>
+                        </a>
+                            </td>
+                    </tr>
+                </table>
+            </div>
+        </h1>
+        {% block content %}
+        {% endblock %}
+        <footer>
+            <div id="nav2">
+                <table>
+                    <tr>
+                        <td class="navi2">
+                            <a href="{{url_for('about')}}">
+                                <div class="nav2button">
+                                    About
+                                </div>
+                            </a>
+                        </td>
+                        <td class="navi2">
+                            <a href="{{url_for('contact')}}">
+                                <div class="nav2button">
+                                    Contact
+                                </div>
+                            </a>
+                        </td>
+                        <td class="navi2">
+                            <a href="{{url_for('privacy')}}">
+                                <div class="nav2button">
+                                    Privacy Policy
+                                </div>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
