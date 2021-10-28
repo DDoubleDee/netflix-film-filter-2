@@ -1,6 +1,6 @@
 from dotenv import load_dotenv
 from mainscript import FileScripts, DataBaseScripts, User, sort_data_and_search
-from flask import Flask, render_template, redirect, url_for, request, abort
+from flask import Flask, render_template, redirect, url_for, request, abort, Response
 from flask_login import LoginManager, login_user, logout_user, login_required
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -15,7 +15,8 @@ mlist = sort_data_and_search(data_base.get_data(),  # get a default list from sq
                              search='',  # user search input, empty by default
                              reverse=False,  # reverse sort, if false sort is descending, if true sort is ascending
                              search_in='title')  # search in what column, title by default
-
+mlistdef = mlist.truncate(before=0, after=10).to_dict('records')
+print(mlistdef)
 app = Flask(__name__)  # initialize Flask class
 login_manager = LoginManager()  # initialize login manager
 login_manager.init_app(app)  # initialize login manager in flask app
@@ -32,17 +33,17 @@ def home():
     if request.method == "POST":
         sorting_by = request.form.get('sortby')  # What column to sort by
         search_field = request.form.get('searchbar')  # User searchbar input
-        reverse = True if request.form.get('reversesort') is 1 else False  # Reverse order of sort
+        reverse = True if request.form.get('reversesort') == 1 else False  # Reverse order of sort
         search_where = request.form.get('searchwhere')  # What column to search in
         filter_by_type = request.form.get('filterer')  # What type of show to show
-        sort_data_and_search(data_base.get_data(show_type=filter_by_type),
+        mlist = sort_data_and_search(data_base.get_data(show_type=filter_by_type).to_dict('records'),
                              sorting_by=sorting_by,
                              search=search_field,
                              reverse=reverse,
                              search_in=search_where)
         return render_template("home.html", mlist=mlist)
     else:
-        return render_template("home.html", mlist=mlist)
+        return render_template("home.html", mlist=mlistdef)
 
 
 @app.route("/profile")
@@ -102,6 +103,11 @@ def about():
 @app.route("/privacy")
 def privacy():
     return render_template("privacy.html")
+
+
+@app.errorhandler(401)
+def page_not_found(e):
+    return Response('Failed')
 
 
 if __name__ == "__main__":
