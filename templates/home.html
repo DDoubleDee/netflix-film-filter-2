@@ -14,36 +14,36 @@
                         <td>
                             <div class="filters">
                                 Sort by:
-                                <select name="sorter">
-                                    <option value="0">
+                                <select name="sortby">
+                                    <option value="">
                                         No Sort
                                     </option>
-                                    <option value="1">
-                                        Date descending
+                                    <option value="release_date">
+                                        Date
                                     </option>
-                                    <option value="2">
-                                        Date ascending
-                                    </option>
-                                    <option value="3">
-                                        Title a-z
-                                    </option>
-                                    <option value="4">
-                                        Title z-a
+                                    <option value="title">
+                                        Title
                                     </option>
                                 </select>
                             </div>
                         </td>
                         <td>
                             <div class="filters">
+                                <input type="checkbox" name="reversesort" value="1" checked/>
+                                Reverse sort?
+                            </div>
+                        </td>
+                        <td>
+                            <div class="filters">
                                 Filter by:
                                 <select name="filterer">
-                                    <option value="0">
+                                    <option value="">
                                         No Filter
                                     </option>
-                                    <option value="1">
+                                    <option value="Movie">
                                         Movie
                                     </option>
-                                    <option value="2">
+                                    <option value="TV Show">
                                         TV Show
                                     </option>
                                 </select>
@@ -61,31 +61,31 @@
                         </td>
                         <td>
                             <div class="filters">
-                                <input type="checkbox" name="titlecheck" value="on"/ checked>
+                                <input type="radio" name="searchwhere" value="title" checked/>
                                 Title
                             </div>
                         </td>
                         <td>
                             <div class="filters">
-                                <input type="checkbox" name="countrycheck" value="on"/>
+                                <input type="radio" name="searchwhere" value="country"/>
                                 Country
                             </div>
                         </td>
                         <td>
                             <div class="filters">
-                                <input type="checkbox" name="genrecheck" value="on"/>
+                                <input type="radio" name="searchwhere" value="listed_in"/>
                                 Genre
                             </div>
                         </td>
                         <td>
                             <div class="filters">
-                                <input type="checkbox" name="castcheck" value="on"/>
+                                <input type="radio" name="searchwhere" value="cast"/>
                                 Cast
                             </div>
                         </td>
                         <td>
                             <div class="filters">
-                                <input type="checkbox" name="desccheck" value="on"/>
+                                <input type="radio" name="searchwhere" value="description"/>
                                 Description
                             </div>
                         </td>
@@ -99,40 +99,40 @@
         <main>
             <div id="contents">
                 {% for movie in mlist %}
-                <a href="{{ 'https://www.netflix.com/kz/title/{0}'.format(movie[1]) }}" target="_blank">
+                <a href="{{ 'https://www.netflix.com/kz/title/{0}'.format(movie['ID']) }}" target="_blank">
                 <table>
                     <tr>
                         <td>
-                            {{movie[2]}}
+                            {{movie['type']}}
                         </td>
                         <td colspan="2">
-                            {{movie[3]}}
+                            {{movie['title']}}
                         </td>
                         <td>
-                            {{movie[8]}}
+                            {{movie['release_year']}}
                         </td>
                         <td>
-                            {{movie[5]}}
+                            {{movie['cast']}}
                         </td>
                         <td rowspan="2">
-                            {{movie[12]}}
+                            {{movie['description']}}
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            {{movie[9]}}
+                            {{movie['rating']}}
                         </td>
                         <td>
-                            {{movie[6]}}
+                            {{movie['country']}}
                         </td>
                         <td>
-                            {{movie[11]}}
+                            {{movie['listed_in']}}
                         </td>
                         <td>
-                            {{movie[10]}}
+                            {{movie['duration']}}
                         </td>
                         <td>
-                            {{movie[4]}}
+                            {{movie['director']}}
                         </td>
                     </tr>
                 </table>

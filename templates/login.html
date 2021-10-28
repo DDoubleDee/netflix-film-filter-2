@@ -12,7 +12,6 @@
                 <form action="{{url_for('login')}}" method="POST">
                     <input class="bar" type="text" name="nickname" placeholder="Nickname or email"/>
                     <input class="bar" type="password" name="password" placeholder="Password"/>
-                    <div><input type="checkbox" name="remain" value="on"/>Remain logged in</div>
                     <input id="submitbutton" type="submit" value="Submit"/>
                 </form>
                 <a href="{{url_for('register')}}"><button>Don't have an account?</button></a>
